@@ -2,7 +2,7 @@
 "use strict"; /* Exiger la déclaration */
 
 
-document.write(100); //dernier nombre 100 sans virgule
+
 
 
 

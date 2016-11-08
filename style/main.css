@@ -1,4 +1,47 @@
-em {
-    color: yellow;
+* {
+    margin: 0; /*Supprime la marge externe pour tous les éléments */
+    padding: 0; /* SUpprime la marge interne pour tous les éléments */
+    box-sizing: border-box; /* Bordures comprises dans les dimensions */
+}
+
+body {
+    width:80%;
+    margin: 0 auto;
+    background-color: antiquewhite;
+}
+header {
+    margin-top: 5px;
+}
+header h1 {
+    text-align: center;
+    font-size: 3rem;
+}
+div#container {
+    position: absolute;
+    width:80%;
+    height: 80%;
+    top: 50%;
+    left: 50%;
+    border: 2px solid black;
+    border-radius: 15px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+    transform: translate(-50%, -50%);
+    background-color: white;
+
+}
+
+div#game {
+    display: inline-block;
+    width: 80%;
+    height: 100%;
+    background-color: beige;
+    border-radius: 15px;
+    padding: 5px;
+}
+div#stats {
+    display: inline-block;
+    width: 20%;
+    margin: -4px;
+    padding: 5px;
 }
 
