@@ -3,7 +3,10 @@
     padding: 0; /* SUpprime la marge interne pour tous les éléments */
     box-sizing: border-box; /* Bordures comprises dans les dimensions */
 }
-
+@font-face {
+    font-family: blackops;
+    src: url("blops.ttf");
+}
 body {
     width:80%;
     margin: 0 auto;
@@ -12,9 +15,15 @@ body {
 header {
     margin-top: 5px;
 }
-header h1 {
+h1 {
     text-align: center;
+}
+header h1 {
     font-size: 3rem;
+}
+#game h1 {
+    font-family: blackops, serif;
+    font-size: 20px;
 }
 div#container {
     position: absolute;
@@ -34,16 +43,23 @@ div#game {
     width: 80%;
     height: 100%;
     background-color: beige;
-    border-radius: 15px;
     padding: 10px;
     vertical-align: top;
     border-radius: 15px 0 0 15px;
+}
+div#gamebox {
+    display: block;
+    border:2px solid black;
+    width: 90%;
+    height: 90%;
+    background: black;
+    margin: 10px auto;
 }
 div#stats {
     display: inline-block;
     width: 20%;
     height: 100%;
-    padding: 5px;
+    padding: 10px;
     border-radius: 0 12px 12px 0;
     background-color: orange;
 }
@@ -51,7 +67,7 @@ textarea{
     display: block;
     border-radius: 10px;
     width: 90%;
-    margin: 10px auto;
-    height: 85%;
+    margin: 2px auto;
+    height: 90%;
 }
 
