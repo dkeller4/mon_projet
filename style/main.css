@@ -27,8 +27,8 @@ header h1 {
 }
 div#container {
     position: absolute;
-    width:80%;
-    height: 80%;
+    width:90%;
+    max-height: 1200px;
     top: 50%;
     left: 50%;
     border: 2px solid black;
@@ -50,9 +50,8 @@ div#game {
 div#gamebox {
     display: block;
     border:2px solid black;
-    width: 90%;
-    height: 90%;
-    background: black;
+    width: 600px;
+    height: 600px;
     margin: 10px auto;
 }
 div#stats {
@@ -70,4 +69,16 @@ textarea{
     margin: 2px auto;
     height: 90%;
 }
-
+table{
+    border-spacing: 0;
+}
+td {
+    display: inline-block;
+    height: 25px;
+    width: 5%;
+    border: 1px solid black
+}
+img {
+    max-height: 100%; /* (100 / 14 rangées) */
+    width: 100% ; /* (100/ 20 colonnes */
+}
