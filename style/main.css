@@ -28,7 +28,7 @@ header h1 {
 div#container {
     position: absolute;
     width:90%;
-    max-height: 1200px;
+    height: 90%;
     top: 50%;
     left: 50%;
     border: 2px solid black;
@@ -36,7 +36,7 @@ div#container {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
     transform: translate(-50%, -50%);
     background-color: white;
-
+    margin: 10px;
 }
 div#game {
     display: inline-block;
@@ -49,10 +49,14 @@ div#game {
 }
 div#gamebox {
     display: block;
-    border:2px solid black;
-    width: 600px;
-    height: 600px;
+    width: 80%;
+    height: 80%;
+    min-height: 85px;
+    max-height: 80%;
     margin: 10px auto;
+    position: relative;
+    top: 45%;
+    transform: translateY(-50%);
 }
 div#stats {
     display: inline-block;
@@ -70,15 +74,21 @@ textarea{
     height: 90%;
 }
 table{
-    border-spacing: 0;
+    border-collapse: collapse;
+    height: 100%;
+    width: 100%;
+}
+
+tr {
 }
 td {
-    display: inline-block;
-    height: 25px;
+    border: 1px solid black;
+    height: 5%;
     width: 5%;
-    border: 1px solid black
+    background-color: antiquewhite;
 }
 img {
+    display: none;
     max-height: 100%; /* (100 / 14 rangées) */
-    width: 100% ; /* (100/ 20 colonnes */
+    max-width: 100% ; /* (100/ 20 colonnes */
 }
