@@ -93,3 +93,10 @@ img {
     background: black;
     vertical-align: top;
 }
+#gamebox div.img1 {
+    background: url("../images/tuile1.gif") center; /* Image mur */
+}
+#gamebox div.img0 {
+    background: url("../images/tuile0.gif"); /* Image chemin */
+}
+
