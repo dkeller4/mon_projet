@@ -21,7 +21,7 @@ h1 {
 header h1 {
     font-size: 3rem;
 }
-#game h1 {
+#game h1, #stats h1 {
     font-family: blackops, serif;
     font-size: 20px;
 }
@@ -49,10 +49,12 @@ div#game {
 }
 div#gamebox {
     display: block;
-    width: 80%;
-    height: 80%;
+    width: 450px;
+    height: 450px;
     min-height: 85px;
     max-height: 80%;
+    min-width: 85px;
+    max-width: 80%;
     margin: 10px auto;
     position: relative;
     top: 45%;
@@ -70,8 +72,9 @@ textarea{
     display: block;
     border-radius: 10px;
     width: 90%;
-    margin: 2px auto;
-    height: 90%;
+    margin: 20px auto;
+    height: 85%;
+    padding: 5px;
 }
 table{
     border-collapse: collapse;
@@ -83,8 +86,6 @@ tr {
 }
 td {
     border: 1px solid black;
-    height: 5%;
-    width: 5%;
     background-color: antiquewhite;
 }
 img {
