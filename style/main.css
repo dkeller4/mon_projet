@@ -1,4 +1,95 @@
-em {
-    color: yellow;
+* {
+    margin: 0; /*Supprime la marge externe pour tous les éléments */
+    padding: 0; /* SUpprime la marge interne pour tous les éléments */
+    box-sizing: border-box; /* Bordures comprises dans les dimensions */
+}
+@font-face {
+    font-family: blackops;
+    src: url("blops.ttf");
+}
+body {
+    width:80%;
+    margin: 0 auto;
+    background-color: antiquewhite;
+}
+header {
+    margin-top: 5px;
+}
+h1 {
+    text-align: center;
+}
+header h1 {
+    font-size: 3rem;
+}
+#game h1, #stats h1 {
+    font-family: blackops, serif;
+    font-size: 20px;
+}
+div#container {
+    position: absolute;
+    width:90%;
+    height: 90%;
+    top: 50%;
+    left: 50%;
+    border: 2px solid black;
+    border-radius: 15px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+    transform: translate(-50%, -50%);
+    background-color: white;
+    margin: 10px;
+}
+div#game {
+    display: inline-block;
+    width: 80%;
+    height: 100%;
+    background-color: beige;
+    padding: 10px;
+    vertical-align: top;
+    border-radius: 15px 0 0 15px;
+}
+div#gamebox {
+    display: block;
+    width: 450px;
+    height: 450px;
+    min-height: 85px;
+    max-height: 80%;
+    min-width: 85px;
+    max-width: 80%;
+    margin: 10px auto;
+    position: relative;
+    top: 45%;
+    transform: translateY(-50%);
+}
+div#stats {
+    display: inline-block;
+    width: 20%;
+    height: 100%;
+    padding: 10px;
+    border-radius: 0 12px 12px 0;
+    background-color: orange;
+}
+textarea{
+    display: block;
+    border-radius: 10px;
+    width: 90%;
+    margin: 20px auto;
+    height: 85%;
+    padding: 5px;
+}
+table{
+    border-collapse: collapse;
+    height: 100%;
+    width: 100%;
 }
 
+tr {
+}
+td {
+    border: 1px solid black;
+    background-color: antiquewhite;
+}
+img {
+    display: none;
+    max-height: 100%; /* (100 / 14 rangées) */
+    max-width: 100% ; /* (100/ 20 colonnes */
+}
