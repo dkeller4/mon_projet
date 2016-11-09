@@ -5,4 +5,3 @@
 document.write(100); //dernier nombre 100 sans virgule
 
 
-
