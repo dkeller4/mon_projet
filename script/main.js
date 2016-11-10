@@ -19,7 +19,20 @@ function Dessinerimg (positionx,positiony, numero_img) { //position x pour les r
     div.outerHTML=div.outerHTML.replace("img1","img" + numero_img);
 }
 
+function Dessinermap (map) {
+
+}
+
 Inittableau();
-Dessinerimg (10,20, 0);
-Dessinerimg (11,20, 0);
+Dessinerimg (9,10, 0);
+Dessinerimg (10,10, 0);
+Dessinerimg (11,10, 0);
+Dessinerimg (12,10, 0);
+Dessinerimg (13,10, 0);
+Dessinerimg (11,8, 0);
+Dessinerimg (11,9 ,0);
+Dessinerimg (11,10, 0);
+Dessinerimg (11,11, 0);
+Dessinerimg (11,12, 0);
+
 
