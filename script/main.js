@@ -4,12 +4,27 @@
 var nombre_rangees = 14;
 var nombre_colonnes = 20;
 var i,j ;
+var map_niveau1 = [
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+];
 
 function Inittableau() {
     for (i=1; i<=nombre_rangees ; i++) {
         for (j = 1; j <= nombre_colonnes; j++) {
-            var text = "<div id=r" + i + "c" + j + ' class="img1"></div>';
-            document.getElementById("gamebox").innerHTML += text;
+            document.getElementById("gamebox").innerHTML += "<div id=r" + i + "\c" + j + ' class="img1"></div>';
         }
     }
 }
@@ -19,20 +34,15 @@ function Dessinerimg (positionx,positiony, numero_img) { //position x pour les r
     div.outerHTML=div.outerHTML.replace("img1","img" + numero_img);
 }
 
-function Dessinermap (map) {
-
+function Dessinermap (map) { // la map introduite doit être un tableau à deux dimensions
+    Inittableau();
+    for (i=1; i<=nombre_rangees ; i++) {
+        for (j = 1; j <= nombre_colonnes; j++) {
+            Dessinerimg (i,j,map[i-1][j-1]);
+        }
+    }
 }
 
-Inittableau();
-Dessinerimg (9,10, 0);
-Dessinerimg (10,10, 0);
-Dessinerimg (11,10, 0);
-Dessinerimg (12,10, 0);
-Dessinerimg (13,10, 0);
-Dessinerimg (11,8, 0);
-Dessinerimg (11,9 ,0);
-Dessinerimg (11,10, 0);
-Dessinerimg (11,11, 0);
-Dessinerimg (11,12, 0);
 
+Dessinermap(map_niveau1);
 
