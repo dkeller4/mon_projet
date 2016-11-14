@@ -90,7 +90,6 @@ img {
     display: inline-block;
     width: 5%;
     height: 7.14%;
-    background: black;
     vertical-align: top;
 }
 #gamebox div.img1 {
@@ -99,4 +98,10 @@ img {
 #gamebox div.img0 {
     background: url("../images/tuile0.gif"); /* Image chemin */
 }
-
+.pacman {
+    display: inline-block;
+    vertical-align: top;
+    position: absolute;
+    z-index: 2;
+    background: url("../images/pacman.gif") center ;
+}

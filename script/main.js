@@ -5,20 +5,20 @@ var nombre_rangees = 14;
 var nombre_colonnes = 20;
 var i,j ;
 var map_niveau1 = [
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],
-    [1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    [0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1],
+    [0,0,0,0,1,1,1,1,0,1,1,1,1,0,1,1,0,0,0,0],
+    [0,1,1,0,1,1,1,1,0,1,1,1,1,0,1,1,0,1,1,0],
+    [0,1,1,0,1,1,1,1,0,1,1,1,1,0,0,0,0,1,1,0],
+    [0,1,1,0,0,0,0,0,0,1,1,1,1,0,1,1,1,1,1,0],
+    [0,1,1,0,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,0],
+    [0,1,1,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0],
+    [0,1,1,1,0,1,1,1,0,1,1,0,1,1,1,0,1,1,1,0],
+    [0,1,1,1,0,1,1,1,0,1,1,0,1,1,1,0,1,1,1,0],
+    [0,1,1,1,0,1,1,1,0,1,1,0,0,0,0,0,1,1,1,0],
+    [0,1,1,1,0,1,1,1,0,1,1,0,1,1,1,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,1,1,0],
+    [0,1,1,1,1,1,1,1,0,1,1,0,1,1,1,0,1,1,1,0]
 ];
 
 function Inittableau() {
@@ -28,6 +28,7 @@ function Inittableau() {
         }
     }
 }
+
 
 function Dessinerimg (positionx,positiony, numero_img) { //position x pour les rangées, position y pour les colonnes
     var div= document.getElementById("r"+positionx+"c"+positiony);
@@ -42,7 +43,35 @@ function Dessinermap (map) { // la map introduite doit être un tableau à deux 
         }
     }
 }
+function Dessinerpacman(positionx,positiony){
+    $(".pacman").remove(); // Détruire l'ancien Pacman
+    document.getElementById("gamebox").innerHTML += "<div class='pacman' data-position=r"+positionx+"\c"+positiony+'></div>';
+    var increase_x = $("#r1c1").width();
+    var increase_y = $("#r1c1").height();
 
+    increase_x = increase_x *(positionx-1);
+    increase_y = increase_y *(positiony-1);
+    $(".pacman").css("left" , increase_x);
+    $(".pacman").css("top" , increase_y);
+}
+
+// Le code débute ici !!!
 
 Dessinermap(map_niveau1);
+Dessinerpacman(5,10);
+Dessinerpacman(1,1);
+Dessinerpacman(10,1);
+
+
+
+
+
+
+
+$("label").click(function(){
+    $(this).slideUp();
+});
+
+
+
 
