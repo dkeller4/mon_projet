@@ -1,6 +1,9 @@
 /*** Created by dkeller on 2016-10-27.*/
 "use strict"; /* Exiger la déclaration */
-
+var pos = {
+    x:0,
+    y:0
+}
 var nombre_rangees = 14;
 var nombre_colonnes = 20;
 var i,j ;
@@ -52,15 +55,16 @@ function Dessinerpacman(positionx,positiony){
 }
 
 function movedown(object) {
-    var top_init = parseFloat(object.style.top); // Le problème est ici !!!
     var top = parseFloat(object.style.top);
+    var top_max = parseFloat(object.style.top)+hauteur_div; // Le problème est ici !!!
+    console.log(object.style.top);
+    console.log(top_max);
+    console.log('On arrete');
     var id = setInterval(frame, 10);
     function frame() {
-        if (parseFloat(object.style.top) > top_init+hauteur_div) {
+        if (parseFloat(object.style.top) > top_max) {
             clearInterval(id);
-            console.log(object.style.top);
-            console.log(top_init);
-            console.log('On arrete');
+            id=null;
         } else {
             top++;
             object.style.top = top + 'px';
@@ -68,17 +72,20 @@ function movedown(object) {
     }
 }
 // Le code débute ici !!!
-
+var id
 Dessinermap(map_niveau1);
-var largeur_div = $("#r1c1").width();
-var hauteur_div = $("#r1c1").height();
+var div_info = $("#r1c1");
+var largeur_div = div_info.width();
+var hauteur_div = div_info.height();
 
 var pacman = Dessinerpacman(13,3);
 
+addEventListener("click",function(){
+    movedown(pacman);
+});
 
-movedown(pacman);
-movedown(pacman);
-movedown(pacman);
+
+
 
 
 
