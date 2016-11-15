@@ -29,7 +29,6 @@ function Inittableau() {
     }
 }
 
-
 function Dessinerimg (positionx,positiony, numero_img) { //position x pour les rangées, position y pour les colonnes
     var div= document.getElementById("r"+positionx+"c"+positiony);
     div.outerHTML=div.outerHTML.replace("img1","img" + numero_img);
@@ -44,25 +43,42 @@ function Dessinermap (map) { // la map introduite doit être un tableau à deux 
     }
 }
 function Dessinerpacman(positionx,positiony){
-    $(".pacman").remove(); // Détruire l'ancien Pacman
     document.getElementById("gamebox").innerHTML += "<div class='pacman' data-position=r"+positionx+"\c"+positiony+'></div>';
-    var increase_x = $("#r1c1").width();
-    var increase_y = $("#r1c1").height();
-
-    increase_x = increase_x *(positionx-1);
-    increase_y = increase_y *(positiony-1);
+    var increase_x = largeur_div*(positionx-1);
+    var increase_y = hauteur_div *(positiony-1);
     $(".pacman").css("left" , increase_x);
     $(".pacman").css("top" , increase_y);
+    return document.getElementsByClassName("pacman")[0];
 }
 
+function movedown(object) {
+    var top_init = parseFloat(object.style.top); // Le problème est ici !!!
+    var top = parseFloat(object.style.top);
+    var id = setInterval(frame, 10);
+    function frame() {
+        if (parseFloat(object.style.top) > top_init+hauteur_div) {
+            clearInterval(id);
+            console.log(object.style.top);
+            console.log(top_init);
+            console.log('On arrete');
+        } else {
+            top++;
+            object.style.top = top + 'px';
+        }
+    }
+}
 // Le code débute ici !!!
 
 Dessinermap(map_niveau1);
-Dessinerpacman(5,10);
-Dessinerpacman(1,1);
-Dessinerpacman(10,1);
+var largeur_div = $("#r1c1").width();
+var hauteur_div = $("#r1c1").height();
+
+var pacman = Dessinerpacman(13,3);
 
 
+movedown(pacman);
+movedown(pacman);
+movedown(pacman);
 
 
 
