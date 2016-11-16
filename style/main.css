@@ -98,7 +98,7 @@ img {
 #gamebox div.img0 {
     background: url("../images/tuile0.gif"); /* Image chemin */
 }
-.pacman {
+#pacman {
     display: inline-block;
     vertical-align: top;
     position: absolute;
