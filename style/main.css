@@ -105,3 +105,10 @@ img {
     z-index: 2;
     background: url("../images/pacman.gif") center ;
 }
+.erable {
+    display: inline-block;
+    vertical-align: top;
+    position: absolute;
+    z-index: 2;
+    background: url("../images/erable.gif") center ;
+}
