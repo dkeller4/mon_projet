@@ -58,24 +58,24 @@ function Dessinerpacman(position){
     $pacman.css("left" , increase_x);
     $pacman.css("top" , increase_y);
 }
-function Dessinererable(nombre){
-    $('.erable').remove();
+function Dessinererable(nombre_erables){
     var data_erables = [];
 
-
-    for (i=0 ; i< nombre ; i++) {
+    for (i=0 ; i< nombre_erables ; i++) {
 
         do {
             var random_x =(Math.floor(Math.random()*20));
             var random_y =(Math.floor(Math.random()*14));
         } while (map_niveau1[random_y][random_x] == 1 || (random_x ==0 && random_y==0) ); // Pour la map les x et les y sont inversés
 
-        document.getElementById("gamebox").innerHTML += "<div class='erable' id='" + i + "' ></div>";
+        document.getElementById("gamebox").innerHTML += "<div class='erable' data-x='"+random_x+"' data-y='"+random_y+"'id='" + i + "' ></div>";
         var erable = $('.erable#'+i);
         erable.css("left" , largeur_div*(random_x));
         erable.css("top" , hauteur_div *(random_y));
-        data_erables[i].x=random_x;
-        data_erables[i].y=random_y;
+        data_erables[i]= {
+            x:random_x,
+            y:random_y
+        };
     }
       return data_erables;
 }
@@ -164,9 +164,18 @@ function Mouvement(e) {
     else if (e.keyCode == '39' && map_niveau1[pos_pacman.y][pos_pacman.x+1] !=1) {
         vers_la_droite();
     }
-   // for (i=0 ; i<nombre_erables1-destroyed ; i++){
-      // if(pos_pacman == data_erables[i] {
-       //}
+    Controle_erables();
+}
+
+function Controle_erables() {
+    for (i=0 ; i<nombre_erables1-destroyed ; i++){
+        if(pos_pacman.x == data_erables[i].x && pos_pacman.y == data_erables[i].y ) {
+            $('.erable[data-x="'+pos_pacman.x+'"][data-y="'+pos_pacman.y+'"]').remove();
+            data_erables.splice(i,1);
+            destroyed++;
+            console.log("Removed");
+        }
+    }
 }
 
 
@@ -175,7 +184,6 @@ Dessinermap(map_niveau1);
 var div_info = $("#r1c1");
 var largeur_div = div_info.width();
 var hauteur_div = div_info.height();
-
 
 
 Dessinerpacman(pos_pacman);
