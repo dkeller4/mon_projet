@@ -4,7 +4,7 @@ var pos_pacman = {
     x:0,
     y:0
 };
-const nombre_erables1 = 10;
+const NOMBRE_ERABLES1 = 10;
 var nombre_rangees = 14;
 var nombre_colonnes = 20;
 var i,j
@@ -26,52 +26,70 @@ var map_niveau1 = [
     [0,1,1,1,1,1,1,1,0,1,1,0,1,1,1,0,1,1,1,0]
 ];
 
-function Inittableau() {
+/**
+ * Dessine une case de l'arriere-plan en fonction de sa position x,y et de son numéro
+ * @param x
+ * @param y
+ */
+function dessiner_case(x,y, numero_img) {
+    document.getElementById("gamebox").innerHTML += "<div id=r" + x + "\c" + y + ' class="img' + numero_img+ '"></div>';
+}
+
+/**
+ * la map introduite doit être un tableau à deux dimensions
+ * @param map
+ * @constructor
+ */
+function inittableau(map) {
     for (i=1; i<=nombre_rangees ; i++) {
         for (j = 1; j <= nombre_colonnes; j++) {
-            document.getElementById("gamebox").innerHTML += "<div id=r" + i + "\c" + j + ' class="img1"></div>';
+            dessiner_case(i,j,map[i-1][j-1]);
         }
     }
 }
 
-function Dessinerimg (positionx,positiony, numero_img) { //position x pour les rangées, position y pour les colonnes
-    var div= document.getElementById("r"+positionx+"c"+positiony);
-    div.outerHTML=div.outerHTML.replace("img1","img" + numero_img);
-}
-
-function Dessinermap (map) { // la map introduite doit être un tableau à deux dimensions
-    Inittableau();
-    for (i=1; i<=nombre_rangees ; i++) {
-        for (j = 1; j <= nombre_colonnes; j++) {
-            Dessinerimg (i,j,map[i-1][j-1]);
-        }
-    }
-}
-
-function Dessinerpacman(position){
-    $('#pacman').remove();
-
+function creer_pacman(){
     document.getElementById("gamebox").innerHTML += "<div id='pacman' ></div>";
-    var $pacman =$('#pacman');
-    var increase_x = largeur_div*(position.x);
-    var increase_y = hauteur_div *(position.y);
-    $pacman.css("left" , increase_x);
-    $pacman.css("top" , increase_y);
 }
+
+/**
+ * Positionner pacman en fonction de sa position (objet)
+ * @param position
+ */
+function positionner_pacman(position){
+    var $pacman =$('#pacman');
+    $pacman.css("left" , largeur_div*(position.x));
+    $pacman.css("top" , hauteur_div *(position.y));
+}
+
+/** Creer un erable à la position x,y et lui donner un id (numéro)
+ *
+ * @param x
+ * @param y
+ * @param id
+ */
+function creer_erable(x, y , id){
+    document.getElementById("gamebox").innerHTML += "<div class='erable' data-x='"+x+"' data-y='"+y+"'id='" + id + "' ></div>";
+}
+
+function positionner_erable(x,y,id){
+    var erable = $('.erable#'+id);
+    erable.css("left" , largeur_div*(x));
+    erable.css("top" , hauteur_div *(y));
+}
+
 function Dessinererable(nombre_erables){
     var data_erables = [];
 
     for (i=0 ; i< nombre_erables ; i++) {
-
         do {
             var random_x =(Math.floor(Math.random()*20));
             var random_y =(Math.floor(Math.random()*14));
         } while (map_niveau1[random_y][random_x] == 1 || (random_x ==0 && random_y==0) ); // Pour la map les x et les y sont inversés
 
-        document.getElementById("gamebox").innerHTML += "<div class='erable' data-x='"+random_x+"' data-y='"+random_y+"'id='" + i + "' ></div>";
-        var erable = $('.erable#'+i);
-        erable.css("left" , largeur_div*(random_x));
-        erable.css("top" , hauteur_div *(random_y));
+        creer_erable(random_x,random_y, i);
+        positionner_erable(random_x,random_y,i);
+
         data_erables[i]= {
             x:random_x,
             y:random_y
@@ -105,7 +123,7 @@ function vers_le_bas() {
             id=null;
         } else {
             pos_pacman.y+=0.25;
-            Dessinerpacman(pos_pacman);
+            positionner_pacman(pos_pacman);
         }
     }
 }
@@ -119,7 +137,7 @@ function vers_le_haut() {
             id=null;
         } else {
             pos_pacman.y-=0.25;
-            Dessinerpacman(pos_pacman);
+            positionner_pacman(pos_pacman);
         }
     }
 }
@@ -132,7 +150,7 @@ function vers_la_gauche() {
             id=null;
         } else {
             pos_pacman.x-=0.25;
-            Dessinerpacman(pos_pacman);
+            positionner_pacman(pos_pacman);
         }
     }
 }
@@ -145,7 +163,7 @@ function vers_la_droite() {
             id=null;
         } else {
             pos_pacman.x+=0.25;
-            Dessinerpacman(pos_pacman);
+            positionner_pacman(pos_pacman);
         }
     }
 }
@@ -167,8 +185,12 @@ function Mouvement(e) {
     Controle_erables();
 }
 
+/**
+ * Cette fonction compare la position du pacman avec les positions des érables
+ * @constructor
+ */
 function Controle_erables() {
-    for (i=0 ; i<nombre_erables1-destroyed ; i++){
+    for (i=0 ; i<NOMBRE_ERABLES1-destroyed ; i++){
         if(pos_pacman.x == data_erables[i].x && pos_pacman.y == data_erables[i].y ) {
 
             $('.erable[data-x="'+pos_pacman.x+'"][data-y="'+pos_pacman.y+'"]').remove();
@@ -182,7 +204,7 @@ function Controle_erables() {
                     break;
 
             }
-            if (destroyed == nombre_erables1){
+            if (destroyed == NOMBRE_ERABLES1){
                 ion.sound.stop("mario_theme");
                 $('#gamebox').fadeOut("slow");
                 ion.sound.play("level_win");
@@ -191,7 +213,7 @@ function Controle_erables() {
     }
 }
 
-function Init_son (){
+function init_son (){
     ion.sound({
         sounds: [
             {
@@ -223,15 +245,15 @@ function Init_son (){
 
 // Le code débute ici !!!
 
-Init_son();
-Dessinermap(map_niveau1);
+init_son();
+inittableau(map_niveau1);
 var div_info = $("#r1c1");
 var largeur_div = div_info.width();
 var hauteur_div = div_info.height();
 
-
-Dessinerpacman(pos_pacman);
-var data_erables = Dessinererable(nombre_erables1);
+creer_pacman();
+positionner_pacman(pos_pacman);
+var data_erables = Dessinererable(NOMBRE_ERABLES1);
 document.onkeydown = Mouvement;
 
 
