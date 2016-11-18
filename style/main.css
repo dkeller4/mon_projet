@@ -67,13 +67,14 @@ div#stats {
     border-radius: 0 12px 12px 0;
     background-color: orange;
 }
-textarea{
+#stats_score{
     display: block;
     border-radius: 10px;
     width: 90%;
     margin: 20px auto;
     height: 85%;
     padding: 5px;
+    background: white;
 }
 table{
     border-collapse: collapse;

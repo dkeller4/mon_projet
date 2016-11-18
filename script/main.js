@@ -152,16 +152,16 @@ function vers_la_droite() {
 function Mouvement(e) {
 
     e = e || window.event;
-    if (e.keyCode == '38' && map_niveau1[pos_pacman.y-1][pos_pacman.x] != 1) { // Pour la map les x et les y sont inversés
+    if (e.keyCode == '38' && map_niveau1[pos_pacman.y-1][pos_pacman.x] == 0) { // Pour la map les x et les y sont inversés
         vers_le_haut();
     }
-    else if (e.keyCode == '40' && map_niveau1[pos_pacman.y+1][pos_pacman.x] != 1) {
+    else if (e.keyCode == '40' && map_niveau1[pos_pacman.y+1][pos_pacman.x] == 0) {
         vers_le_bas();
     }
-    else if (e.keyCode == '37' && map_niveau1[pos_pacman.y][pos_pacman.x-1]!= 1) {
+    else if (e.keyCode == '37' && map_niveau1[pos_pacman.y][pos_pacman.x-1] == 0) {
         vers_la_gauche();
     }
-    else if (e.keyCode == '39' && map_niveau1[pos_pacman.y][pos_pacman.x+1] !=1) {
+    else if (e.keyCode == '39' && map_niveau1[pos_pacman.y][pos_pacman.x+1] == 0) {
         vers_la_droite();
     }
     Controle_erables();
@@ -170,16 +170,60 @@ function Mouvement(e) {
 function Controle_erables() {
     for (i=0 ; i<nombre_erables1-destroyed ; i++){
         if(pos_pacman.x == data_erables[i].x && pos_pacman.y == data_erables[i].y ) {
+
             $('.erable[data-x="'+pos_pacman.x+'"][data-y="'+pos_pacman.y+'"]').remove();
             data_erables.splice(i,1);
             destroyed++;
-            console.log("Removed");
+            $('<p>+1point</p>').appendTo($('#stats_score'));
+            switch (destroyed % 2) {
+                case 0: ion.sound.play("point");
+                    break;
+                case 1: ion.sound.play("small_item");
+                    break;
+
+            }
+            if (destroyed == nombre_erables1){
+                ion.sound.stop("mario_theme");
+                $('#gamebox').fadeOut("slow");
+                ion.sound.play("level_win");
+            }
         }
     }
 }
 
+function Init_son (){
+    ion.sound({
+        sounds: [
+            {
+                name: "point",
+                volume:1.5
+            },
+            {
+                name: "small_item"
+            },
+            {
+                name: "start"
+            },
+            {
+                name: "mario_theme",
+                volume:0.2,
+                loop: true
+            },
+            {
+                name: "level_win"
+            }
+        ],
+        volume: 0.5,
+        path: "sounds/",
+        preload: true
+    });
+    ion.sound.play("start");
+    ion.sound.play("mario_theme");
+}
 
 // Le code débute ici !!!
+
+Init_son();
 Dessinermap(map_niveau1);
 var div_info = $("#r1c1");
 var largeur_div = div_info.width();
@@ -191,7 +235,8 @@ var data_erables = Dessinererable(nombre_erables1);
 document.onkeydown = Mouvement;
 
 
-console.log(data_erables); // Je n'arrive pas à accéder à l'information en dehors de la fonction
+
+
 
 
 $("label").click(function(){
