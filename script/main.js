@@ -93,7 +93,6 @@ function dessinererable(nombre_erables) {
     }
 }
 
-
 function random_x_y(){
     do {
         random_x = (Math.floor(Math.random() * 20));
@@ -101,7 +100,6 @@ function random_x_y(){
     } while (map_niveau1[random_y][random_x] == 1 || (random_x == 0 && random_y == 0) || double_erable()==true);
 
 }
-
 
     /**
      * Cette fonction renvoie le boolean TRUE lorsque les coordonnées x et y ,générées aléatoirement, correspondent déjà à un érable
@@ -202,6 +200,9 @@ function pacman_vs_erables() {
             data_erables.splice(i,1);
             destroyed++;
             $('<p>+1point</p>').appendTo($('#stats_score'));
+            $('#black_box').find('p').fadeOut(400);
+            $('<p>'+destroyed+'</p>').appendTo($('#black_box')).fadeIn(300);
+
             switch (destroyed % 2) {
                 case 0: ion.sound.play("point");
                     break;
@@ -263,13 +264,8 @@ dessinererable(NOMBRE_ERABLES1);
 document.onkeydown = Mouvement;
 
 
-
 $("label").click(function(){
     $(this).slideUp();
 });
-
-
-
-
 
 
