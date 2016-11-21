@@ -4,11 +4,12 @@ var pos_pacman = {
     x:0,
     y:0
 };
-const NOMBRE_ERABLES1 = 10;
+const NOMBRE_ERABLES1 = 30;
 var nombre_rangees = 14;
 var nombre_colonnes = 20;
 var i,j,random_x,random_y;
 var destroyed =0 ;
+var data_erables = [];
 var map_niveau1 = [
     [0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1],
     [0,0,0,0,1,1,1,1,0,1,1,1,1,0,1,1,0,0,0,0],
@@ -78,52 +79,45 @@ function positionner_erable(x,y,id){
     erable.css("top" , hauteur_div *(y));
 }
 
-function dessinererable(nombre_erables){
-    var data_erables = [];
+function dessinererable(nombre_erables) {
 
-    for (i=0 ; i< nombre_erables ; i++) {
-         // Pour la map les x et les y sont inversés
+    for (i = 0; i < nombre_erables; i++) {
+        // Pour la map les x et les y sont inversés
         random_x_y();
-        creer_erable(random_x,random_y, i);
-        positionner_erable(random_x,random_y,i);
-        data_erables[i]= {
-            x:random_x,
-            y:random_y
-        };
-    } data_erables.forEach(controle_erable,false);
-      return data_erables;
-}
-function controle_erable(item,index,arr) {
-    console.log("Longueur:" +arr.length);
-    console.log("Position x:"+ item.x);
-    console.log("Position y:"+ item.y);
-    return false;
-}
-
-function random_x_y(){
-    do {
-        random_x =(Math.floor(Math.random()*20));
-        random_y =(Math.floor(Math.random()*14));
-
-        // console.log(data_erables.forEach(controle_erable),false);
-    } while (map_niveau1[random_y][random_x] == 1 || (random_x ==0 && random_y==0) );
-}
-
-function movedown(position) {
-    var from_top = parseFloat(object.style.top);
-    var to_top = parseFloat(object.style.top)+hauteur_div; // Le problème est ici !!!
-
-    var id = setInterval(frame, 10);
-    function frame() {
-        if (from_top > to_top) {
-            clearInterval(id);
-            id=null;
-        } else {
-            from_top++;
-            object.style.top = from_top + 'px';
+        creer_erable(random_x, random_y, i);
+        positionner_erable(random_x, random_y, i);
+        data_erables[i] = {
+            x: random_x,
+            y: random_y
         }
     }
 }
+
+
+function random_x_y(){
+    do {
+        random_x = (Math.floor(Math.random() * 20));
+        random_y = (Math.floor(Math.random() * 14));
+    } while (map_niveau1[random_y][random_x] == 1 || (random_x == 0 && random_y == 0) || double_erable()==true);
+
+}
+
+
+    /**
+     * Cette fonction renvoie le boolean TRUE lorsque les coordonnées x et y ,générées aléatoirement, correspondent déjà à un érable
+     * @param positionx
+     * @param positiony
+     * @returns {boolean}
+     */
+    function double_erable(){
+        for (i=0;i<data_erables.length ; i++){
+            if(random_x == data_erables[i].x && random_y == data_erables[i].y){
+                return true
+            }
+        }
+        return false
+    }
+
 
 function vers_le_bas() {
     var to_top = pos_pacman.y+1;
@@ -193,14 +187,14 @@ function Mouvement(e) {
     else if (e.keyCode == '39' && map_niveau1[pos_pacman.y][pos_pacman.x+1] == 0) {
         vers_la_droite();
     }
-    Controle_erables();
+    pacman_vs_erables();
 }
 
 /**
  * Cette fonction compare la position du pacman avec les positions des érables
  * @constructor
  */
-function Controle_erables() {
+function pacman_vs_erables() {
     for (i=0 ; i<NOMBRE_ERABLES1-destroyed ; i++){
         if(pos_pacman.x == data_erables[i].x && pos_pacman.y == data_erables[i].y ) {
 
@@ -265,7 +259,7 @@ var hauteur_div = div_info.height();
 creer_pacman();
 positionner_pacman(pos_pacman);
 
-var data_erables = dessinererable(NOMBRE_ERABLES1);
+dessinererable(NOMBRE_ERABLES1);
 document.onkeydown = Mouvement;
 
 
