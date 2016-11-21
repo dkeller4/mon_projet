@@ -8,6 +8,8 @@ const NOMBRE_ERABLES1 = 30;
 var nombre_rangees = 14;
 var nombre_colonnes = 20;
 var i,j,random_x,random_y;
+var s = 0;
+var m = 0;
 var destroyed =0 ;
 var data_erables = [];
 var map_niveau1 = [
@@ -116,7 +118,6 @@ function random_x_y(){
         return false
     }
 
-
 function vers_le_bas() {
     var to_top = pos_pacman.y+1;
     var id = setInterval(frame, 10);
@@ -200,22 +201,9 @@ function pacman_vs_erables() {
             data_erables.splice(i,1);
             destroyed++;
 
-            // SCORE
-            $('<p>+1point</p>').appendTo($('#stats_score'));
-            var stats =  $('#black_box');
-            stats.find('p').remove();
-            $('<p>'+destroyed+'</p>').appendTo($(stats));
-            stats.find('p').fadeIn(500);
+            score();
+            son(point);
 
-
-
-            switch (destroyed % 2) {
-                case 0: ion.sound.play("point");
-                    break;
-                case 1: ion.sound.play("small_item");
-                    break;
-
-            }
             if (destroyed == NOMBRE_ERABLES1){
                 ion.sound.stop("mario_theme");
                 $('#gamebox').fadeOut("slow");
@@ -223,6 +211,25 @@ function pacman_vs_erables() {
             }
         }
     }
+}
+
+function score(){
+    $('<p>+1point</p>').appendTo($('#stats_score'));
+    var stats =  $('#black_box');
+    stats.find('p').remove();
+    $('<p>'+destroyed+'</p>').appendTo($(stats));
+    stats.find('p').fadeIn(500);
+}
+function son(text){
+    switch (text)
+        case "point":  switch (destroyed % 2) {
+            case 0: ion.sound.play("point");
+                break;
+            case 1: ion.sound.play("small_item");
+                break;
+            case "text" :
+        }
+
 }
 
 function init_son (){
@@ -255,11 +262,10 @@ function init_son (){
     ion.sound.play("mario_theme");
 }
 function startTime() {
-    var today = new Date();
-    var s = today.getSeconds();
-    var ms= today.getMilliseconds();
-    $('#black_box2').find('p').text("Timer : " + s);
-    var t = setTimeout(startTime, 500);
+    s++;
+    if (s==60){s=0; m+=1}
+    $('#black_box2').find('p').text("Timer : " + m + ":" + s);
+    var t = setTimeout(startTime, 1000);
 }
 
 // Le code débute ici !!!

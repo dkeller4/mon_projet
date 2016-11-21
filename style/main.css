@@ -80,14 +80,14 @@ div#stats {
     line-height: 100px;
     display: none;
 }
-#black_box2 {
+#black_box2, #black_box3 {
     background-color: black;
     width: 100%;
     height: 40px;
     margin-top: 5px;
 }
 
-#black_box2 p {
+#black_box2 p,#black_box3 p {
    color: white;
     font-size: 20px;
 }
