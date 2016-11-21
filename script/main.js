@@ -199,9 +199,15 @@ function pacman_vs_erables() {
             $('.erable[data-x="'+pos_pacman.x+'"][data-y="'+pos_pacman.y+'"]').remove();
             data_erables.splice(i,1);
             destroyed++;
+
+            // SCORE
             $('<p>+1point</p>').appendTo($('#stats_score'));
-            $('#black_box').find('p').fadeOut(400);
-            $('<p>'+destroyed+'</p>').appendTo($('#black_box')).fadeIn(300);
+            var stats =  $('#black_box');
+            stats.find('p').remove();
+            $('<p>'+destroyed+'</p>').appendTo($(stats));
+            stats.find('p').fadeIn(500);
+
+
 
             switch (destroyed % 2) {
                 case 0: ion.sound.play("point");
@@ -248,10 +254,17 @@ function init_son (){
     ion.sound.play("start");
     ion.sound.play("mario_theme");
 }
+function startTime() {
+    var today = new Date();
+    var s = today.getSeconds();
+    var ms= today.getMilliseconds();
+    $('#black_box2').find('p').text("Timer : " + s);
+    var t = setTimeout(startTime, 500);
+}
 
 // Le code débute ici !!!
 
-init_son();
+init_son();startTime();
 inittableau(map_niveau1);
 var div_info = $("#r1c1");
 var largeur_div = div_info.width();
@@ -262,7 +275,6 @@ positionner_pacman(pos_pacman);
 
 dessinererable(NOMBRE_ERABLES1);
 document.onkeydown = Mouvement;
-
 
 $("label").click(function(){
     $(this).slideUp();
