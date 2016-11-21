@@ -270,15 +270,11 @@ function highscore(){
     var highscore = localStorage.high_score;
     var highscoreminutes = highscore.substr(0, highscore.indexOf("m"));
     var highscoreseconds = highscore.substr(highscore.indexOf(":")+1,highscore.indexOf("s")-3);
-    if (m<highscoreminutes) {
+    if (m<highscoreminutes || highscore==0) {
         localStorage.high_score = m +"m:" +s + "s" ;
     } else if (m==highscoreminutes && s<highscoreseconds){
         localStorage.high_score = m +"m:" +s + "s" ;
     }
-
-    console.log("le record est de " +highscore);
-    console.log("le record en m est de " +highscoreminutes);
-    console.log("le record est de " + highscoreseconds);
     $('#black_box3 p').text("High Score : " +localStorage.high_score);
 }
 
@@ -317,12 +313,21 @@ function startTime() {
     $('#black_box2').find('p').text("Timer : " + m + "m:" + s +"s");
     t = setTimeout(startTime, 1000);
 }
-
+function init_highscore(){
+    $('#black_box3 p').text("High Score : " +localStorage.high_score);
+}
+function reset_highscore(){
+    localStorage.high_score = 0;
+    init_highscore();
+    console.log("test");
+}
 // Le code débute ici !!!
 
-init_son();startTime();
-$('#black_box3 p').text("High Score : " +localStorage.high_score);
+init_son();
+startTime();
+init_highscore();
 inittableau(map_niveau1);
+document.getElementById("button1").addEventListener("click",reset_highscore);
 var div_info = $("#r1c1");
 var largeur_div = div_info.width();
 var hauteur_div = div_info.height();
